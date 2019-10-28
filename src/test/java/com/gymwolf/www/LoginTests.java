@@ -3,9 +3,12 @@ package com.gymwolf.www;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import viewElements.LandingView;
+
+import java.util.concurrent.TimeUnit;
 
 public class LoginTests {
     private WebDriver driver;
@@ -27,6 +30,9 @@ public class LoginTests {
         }
         driver.manage().window().maximize();
         driver.get(PublicMethods.defaultURL);
+
+        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+        //WebDriverWait wait = new WebDriverWait(driver, 1);
     }
 
 //test1234@tetsing.com Parool123 Tamm Tammemäe

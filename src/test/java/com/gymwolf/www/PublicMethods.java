@@ -10,12 +10,14 @@ public class PublicMethods {
 
 
     public static void loginToPage(WebDriver driver, String username, String password){
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-
-        wait.until(ExpectedConditions.elementToBeClickable(LandingView.toLoginField())).click();
+       /* wait.until(ExpectedConditions.elementToBeClickable(LandingView.toLoginField())).click();
         wait.until(ExpectedConditions.elementToBeClickable(LandingView.emailField())).sendKeys(username);
         wait.until(ExpectedConditions.elementToBeClickable(LandingView.passwordField())).sendKeys(password);
-        wait.until(ExpectedConditions.elementToBeClickable(LandingView.loginButton())).click();
+        wait.until(ExpectedConditions.elementToBeClickable(LandingView.loginButton())).click(); */
+        driver.findElement(LandingView.toLoginField()).click();
+        driver.findElement(LandingView.emailField()).sendKeys(username);
+        driver.findElement(LandingView.passwordField()).sendKeys(password);
+        driver.findElement(LandingView.loginButton()).click();
     }
 
     //for debugging
@@ -27,5 +29,3 @@ public class PublicMethods {
         }
     }
 }
-
-//3h
