@@ -1,0 +1,35 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="LoginTestsSuite" verbose="1" >
+    <test name="PositiveLoginTest">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="username" value="test1234@tetsing.com"/>
+        <parameter name="password" value="Parool123"/>
+        <parameter name="expectedName" value="Tamm Tammemäe"/>
+        <classes>
+            <class name="com.gymwolf.www.LoginTests">
+                <methods>
+                    <include name="positiveLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="NegativeLoginTest">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="username" value="test1234@tetsing.com"/>
+        <parameter name="password" value="invalidPassword"/>
+        <parameter name="expectedMessage" value="Vale parool või e-maili aadress, palun proovige uuesti."/>
+        <classes>
+            <class name="com.gymwolf.www.LoginTests">
+                <methods>
+                    <include name="negativeLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite>
+
+
