@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Gymwolf Automated Tests" />
+        <module name="Gymwolf_Automated_Tests" />
       </profile>
     </annotationProcessing>
   </component>
