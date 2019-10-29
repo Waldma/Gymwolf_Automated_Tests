@@ -1,16 +1,9 @@
 package com.gymwolf.www;
-
 import Controllers.PublicMethods;
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import viewElements.MainView;
-
-import java.util.concurrent.TimeUnit;
 
 public class LoginTests {
    private WebDriver driver;
@@ -18,29 +11,11 @@ public class LoginTests {
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true)
     private void setUp(@Optional("chrome") String browser){
-        switch (browser){
-            case "chrome" :
-                ChromeDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                break;
-            case "firefox" :
-                FirefoxDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                break;
-            default:
-                System.out.println("unknown browser: "+browser+" Starting default browser chrome instead");
-                ChromeDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                break;
-        }
-        driver.manage().window().maximize();
-        driver.get(PublicMethods.defaultURL);
-
-        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+        driver = PublicMethods.setupWebDriver(browser);
+        PublicMethods.configureWebDriver(driver);
     }
 
-
-//test1234@tetsing.com Parool123 Tamm Tammemäe
+    //test1234@tetsing.com Parool123 Tamm Tammemäe
     @Parameters({"username", "password", "expectedName"})
     @Test(groups = {"positiveTests", "smokeTests"})
     public void positiveLoginTest(String username, String password, String expectedName){
@@ -62,6 +37,4 @@ public class LoginTests {
     private void tearDown(){
         driver.quit();
     }
-
-
 }
