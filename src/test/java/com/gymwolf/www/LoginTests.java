@@ -15,7 +15,6 @@ public class LoginTests {
         PublicMethods.configureWebDriver(driver);
     }
 
-    //test1234@tetsing.com Parool123 Tamm Tammemäe
     @Parameters({"username", "password", "expectedName"})
     @Test(groups = {"positiveTests", "smokeTests"})
     public void positiveLoginTest(String username, String password, String expectedName){
