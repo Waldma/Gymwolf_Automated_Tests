@@ -13,12 +13,12 @@ public class WorkoutView {
     public static By workoutHeartRate(){return By.id("exe-heart-rate");}
     public static By workoutCalories(){return By.id("exe-cal");}
     public static By workoutDuration(){return By.id("exe-dur");}
-    public static By workoutDistance(){return By.id("exe-dis");}
+    public static By workoutDistance(){return By.id("exe-dist");}
     public static By workoutIncline(){return By.id("exe-incline");}
     public static By workoutBodyweight(){return By.id("bodyweight");}
     public static By workoutNotes(){return By.id("notes-area");}
 
-    public static By workouSave(){return By.xpath("//button[@class='btn btn-success']\"");}
+    public static By workoutSaveButton(){return By.xpath("//button[@class='btn btn-success']");}
 
 
 

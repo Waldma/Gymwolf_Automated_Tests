@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="WorkoutSuite" verbose="1" >
+    <test name="LatestCardioWorkoutTest">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="username" value="test1234@tetsing.com"/>
+        <parameter name="password" value="Parool123"/>
+        <parameter name="expectedName" value="Tamm Tammemäe"/>
+        <parameter name="activity" value="Running a marathon"/>
+        <parameter name="notes" value="Did not die, success!"/>
+        <parameter name="duration" value="04:23:54"/>
+        <parameter name="distance" value="42.2"/>
+        <parameter name="heartrate" value="140"/>
+        <parameter name="calories" value="2300"/>
+        <parameter name="incline" value="2"/>
+        <parameter name="bodyweight" value="89"/>
+        <parameter name="date" value="17/07/2019"/>
+        <classes>
+            <class name="com.gymwolf.www.WorkoutTests">
+                <methods>
+                    <include name="latestCardioWorkoutTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite>
+
+

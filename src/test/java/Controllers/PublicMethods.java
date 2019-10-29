@@ -3,12 +3,14 @@ package Controllers;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import viewElements.MainView;
+import viewElements.WorkoutView;
 
 import java.rmi.UnexpectedException;
 import java.util.concurrent.TimeUnit;
@@ -24,9 +26,18 @@ public class PublicMethods {
         driver.findElement(MainView.loginButton()).click();
     }
 
-    public static void addNewCardioWorkout( WebDriver driver, String activity, String notes, String duration, String distance, String hearthrate, String calories, String incline, String bodyweight, String date) {
+    public static void addNewCardioWorkout( WebDriver driver, String activity, String notes, String duration, String distance, String heartrate, String calories, String incline, String bodyweight, String date) {
+        driver.findElement(WorkoutView.workoutDate()).sendKeys(Keys.chord(Keys.CONTROL, "a"), date);
+        driver.findElement(WorkoutView.workoutActivity()).sendKeys(activity);
+        driver.findElement(WorkoutView.workoutHeartRate()).sendKeys(heartrate);
+        driver.findElement(WorkoutView.workoutCalories()).sendKeys(calories);
+        driver.findElement(WorkoutView.workoutDuration()).sendKeys(Keys.chord(Keys.CONTROL, "a"),duration);
+        driver.findElement(WorkoutView.workoutDistance()).sendKeys(distance);
+        driver.findElement(WorkoutView.workoutIncline()).sendKeys(incline);
+        driver.findElement(WorkoutView.workoutBodyweight()).sendKeys(bodyweight);
+        driver.findElement(WorkoutView.workoutNotes()).sendKeys(notes);
 
-
+        driver.findElement(WorkoutView.workoutSaveButton()).click();
     }
 
     //for debugging

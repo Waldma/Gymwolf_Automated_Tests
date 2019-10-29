@@ -3,9 +3,12 @@ package com.gymwolf.www;
 import Controllers.PublicMethods;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import viewElements.MainView;
 import viewElements.WorkoutView;
@@ -40,14 +43,18 @@ public class WorkoutTests {
         PublicMethods.loginToPage(driver, username, password);
     }
 
-    @Test
-    public void LatestCardioWorkoutTest(String expectedName, String activity, String notes, String duration, String distance, String hearthrate, String calories, String incline, String bodyweight, String date){
+    @Parameters({"expectedName", "activity", "notes", "duration", "distance", "heartrate", "calories", "incline", "bodyweight", "date" })
+    @Test(groups = {"workoutTests", "smokeTests"})
+    public void latestCardioWorkoutTest(String expectedName, String activity, String notes, String duration, String distance, String heartrate, String calories, String incline, String bodyweight, String date){
         driver.findElement(MainView.newWorkoutButton()).click();
         driver.findElement(WorkoutView.cardioWorkoutButton()).click();
 
-        PublicMethods.addNewCardioWorkout(driver, activity, notes, duration, distance, hearthrate, calories, incline, bodyweight, date);
+        PublicMethods.addNewCardioWorkout(driver, activity, notes, duration, distance, heartrate, calories, incline, bodyweight, date);
+        driver.get(PublicMethods.defaultURL);
 
-
+        String latestWorkoutField = driver.findElement(MainView.latestWorkouts()).getText();
+        Assert.assertTrue(latestWorkoutField.contains(expectedName), "cant find right person in feed");
+        Assert.assertTrue(latestWorkoutField.contains(notes), "cant find note in feed");
     }
 
 
