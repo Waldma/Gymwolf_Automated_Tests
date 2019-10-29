@@ -6,18 +6,18 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
 import viewElements.MainView;
+import viewElements.WorkoutView;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginTests {
-   private WebDriver driver;
+public class WorkoutTests {
+    private WebDriver driver;
 
-    @Parameters({"browser"})
+    @Parameters({"browser", "username", "password"})
     @BeforeMethod(alwaysRun = true)
-    private void setUp(@Optional("chrome") String browser){
+    private void setUp(@Optional("chrome") String browser, String username, String password){
         switch (browser){
             case "chrome" :
                 ChromeDriverManager.chromedriver().setup();
@@ -35,33 +35,25 @@ public class LoginTests {
         }
         driver.manage().window().maximize();
         driver.get(PublicMethods.defaultURL);
-
         driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
-    }
 
-
-//test1234@tetsing.com Parool123 Tamm Tammemäe
-    @Parameters({"username", "password", "expectedName"})
-    @Test(groups = {"positiveTests", "smokeTests"})
-    public void positiveLoginTest(String username, String password, String expectedName){
         PublicMethods.loginToPage(driver, username, password);
-        Assert.assertTrue(driver.findElement(MainView.nameMenuDropdown()).getText().contains(expectedName), "Cant find user: "+username+" logged in.");
-        driver.findElement(MainView.nameMenuDropdown()).click();
-        Assert.assertTrue(driver.findElement(MainView.logOutButton()).isDisplayed(), "Logout button is not visible.");
     }
 
-    @Parameters({"username", "password", "expectedMessage"})
-    @Test(groups = {"negativeTests", "smokeTests"})
-    public void negativeLoginTest(String username, String password, String expectedMessage){
-        PublicMethods.loginToPage(driver, username, password);
-        String actualMessage = driver.findElement(MainView.invalidLoginErrorField()).getText();
-        Assert.assertTrue(actualMessage.contains(expectedMessage), "Expected: \n"+expectedMessage+"\n but got: \n"+actualMessage);
+    @Test
+    public void LatestCardioWorkoutTest(String expectedName, String activity, String notes, String duration, String distance, String hearthrate, String calories, String incline, String bodyweight, String date){
+        driver.findElement(MainView.newWorkoutButton()).click();
+        driver.findElement(WorkoutView.cardioWorkoutButton()).click();
+
+        PublicMethods.addNewCardioWorkout(driver, activity, notes, duration, distance, hearthrate, calories, incline, bodyweight, date);
+
+
     }
+
+
 
     @AfterMethod(alwaysRun = true)
-    private void tearDown(){
+    private void tearDown() {
         driver.quit();
     }
-
-
 }

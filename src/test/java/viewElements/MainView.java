@@ -2,8 +2,7 @@ package viewElements;
 
 import org.openqa.selenium.By;
 
-public class LandingView {
-//"//a[@class='button secondary radius']";
+public class MainView {
 
 // LANDING ELEMENTS
     public static By toLoginField(){
@@ -26,5 +25,15 @@ public class LandingView {
         public static By logOutButton(){
         return By.xpath("//div[@id='main-menu']/ul[@class='nav navbar-nav navbar-right']//ul[@class='dropdown-menu']//a[@href='/staging/logout']");
         }
+
+//MAIN PAGE VIEW
+    public static By newWorkoutButton(){return By.xpath("//a[@class='btn btn-lg btn-block btn-success']");}
+
+
+
+
+
+
 }
+
 
