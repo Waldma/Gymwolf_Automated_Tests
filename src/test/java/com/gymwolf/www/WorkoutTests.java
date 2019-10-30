@@ -19,25 +19,8 @@ public class WorkoutTests {
     @Parameters({"browser", "username", "password"})
     @BeforeMethod(alwaysRun = true)
     private void setUp(@Optional("chrome") String browser, String username, String password){
-        switch (browser){
-            case "chrome" :
-                ChromeDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                break;
-            case "firefox" :
-                FirefoxDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                break;
-            default:
-                System.out.println("unknown browser: "+browser+" Starting default browser chrome instead");
-                ChromeDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                break;
-        }
-        driver.manage().window().maximize();
-        driver.get(PublicMethods.defaultURL);
-        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
-
+        driver = PublicMethods.setupWebDriver(browser);
+        PublicMethods.configureWebDriver(driver);
         PublicMethods.loginToPage(driver, username, password);
     }
 
