@@ -27,7 +27,7 @@ public class MainView {
         }
 
 //MAIN PAGE VIEW
-    public static By newWorkoutButton(){return By.cssSelector("p > .btn.btn-block.btn-lg.btn-success");}
+    public static By newWorkoutButton(){return By.xpath("//p[@class='hidden-xs']");}
     public static By latestWorkouts(){return By.xpath("//table[@class='table table-workout-list']");}
 
 
